@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+public class CurrencyConverter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        double amount;
+        String sourceCurrency, targetCurrency;
+        
+        System.out.println("Currency Converter");
+        System.out.print("Enter the amount to convert: ");
+        amount = scanner.nextDouble();
+        
+        System.out.print("Enter the source currency (e.g., USD, EUR, GBP): ");
+        sourceCurrency = scanner.next().toUpperCase();
+        
+        System.out.print("Enter the target currency (e.g., USD, EUR, GBP): ");
+        targetCurrency = scanner.next().toUpperCase();
+        
+        double convertedAmount = convertCurrency(amount, sourceCurrency, targetCurrency);
+        
+        System.out.println(amount + " " + sourceCurrency + " = " + convertedAmount + " " + targetCurrency);
+        
+        scanner.close();
+    }
+    
+    public static double convertCurrency(double amount, String sourceCurrency, String targetCurrency) {
+        // Sample conversion rates
+        double usdToEur = 0.85;
+        double usdToGbp = 0.72;
+        double eurToUsd = 1.18;
+        double eurToGbp = 0.85;
+        double gbpToUsd = 1.39;
+        double gbpToEur = 1.18;
+        
+        // Convert the amount based on the conversion rates
+        if (sourceCurrency.equals("USD") && targetCurrency.equals("EUR")) {
+            return amount * usdToEur;
+        } else if (sourceCurrency.equals("USD") && targetCurrency.equals("GBP")) {
+            return amount * usdToGbp;
+        } else if (sourceCurrency.equals("EUR") && targetCurrency.equals("USD")) {
+            return amount * eurToUsd;
+        } else if (sourceCurrency.equals("EUR") && targetCurrency.equals("GBP")) {
+            return amount * eurToGbp;
+        } else if (sourceCurrency.equals("GBP") && targetCurrency.equals("USD")) {
+            return amount * gbpToUsd;
+        } else if (sourceCurrency.equals("GBP") && targetCurrency.equals("EUR")) {
+            return amount * gbpToEur;
+        } else if (sourceCurrency.equals(targetCurrency)) {
+            return amount; // Same currency, no conversion needed
+        } else {
+            System.out.println("Invalid source or target currency.");
+            return 0.0; // Return 0 for invalid conversion
+        }
+    }
+}
